@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>NUnit Parameters Generator</Title>
-    <Copyright>VIRTUAL RUNNERS spol s r.o.</Copyright>
+    <Copyright>VIRTUAL RUNNERS spol. s r.o.</Copyright>
     <PackageProjectUrl>https://github.com/JozefFranc/NUnit-Parameters-Generator</PackageProjectUrl>
     <Authors>Jozef Franc</Authors>
     <Version>1.0.0</Version>
-    <Company>VIRTUAL RUNNERS spol s r.o.</Company>
+    <Company>VIRTUAL RUNNERS spol. s r.o.</Company>
   </PropertyGroup>
 
   <ItemGroup>
