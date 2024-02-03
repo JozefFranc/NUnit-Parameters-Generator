@@ -24,25 +24,68 @@ It works like digit wheels. It use all predefined values when you iterate over i
 
 ### SetParamer
 It allow us genrates parameters based on predefined set.
-Example:
+
+**Example:**
 ```
 var primeNumbers = new SetParameter<int>("PrimeNumber", new[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 });
 ```
+Where:<br/>
+int - type of parameter<br/>
+"PrimeNumber" - name of parameter (will be used for output)<br/>
+array of parameters
 
 ### RangePatameter
 It generates parameters base on ranges. It is usually numeric value.
 
+**Example:**
+```
+var temperatureRange = new RangeParameter<int>("Temperature", 20, 40);
+var weightRange = new RangeParameter<decimal>("Weight", 10.0m, 20.0m, 0.01m);
+```
+Where:<br/>
+int, decimal - type of parameter<br/>
+"Temperature", "Weight" - name of parameter (will be used for output)<br/>
+20, 10.0m - start of range
+40, 20.0m - end of range
+0.01m - step in range (this needs to be defined for ranges with floating points)
+
 ### JoinParameters
 It is not real parameter, it just joining more parameters together. For example when you have one RangeParameter form 5 to 20 and second is SetParameter with values 3, 50, 81. After join it will be first applied RangeParameter and then SetParameter.
 
+**Example:**
+```
+var specificWeights = new SetParameter<decimal>("SpecificWeights", new[] { 10.0m, 20.0m });
+var weightRange1 = new RangeParameter<decimal>("WeightRange1", 0m, 1m, 0.1m);
+var weightRange2 = new RangeParameter<decimal>("WeightRange2", 2m, 3m, 0.1m);
+var weights = new JoinParameters("Weight", weightRange1, weightRange2, specificWeights);
+```
+Where:<br/>"Weight" - name of parameter (will be used for output)<br/>
+array of joined parameters
+
 ## Groups
-Groups are useful when you combinate parameters. It is similar to put digit wheels to one line.
+Groups are useful when you combinate parameters. It is similar to put digit wheels to one line. Groups can be nested.
 
 ### CartesianParameterGroup
 This group combine every parameter with each other (similar like mechanical counter). When first parameter use all defined values in iterations, then second parameter is set on next value and first parameter is set to first value.
 
+**Example:**
+```
+var cartesianGroup1 = new CartesianParameterGroup(primeNumbers, temperatureRange);
+var cartesianGroup2 = new CartesianParameterGroup(cartesianGroup1, weightRange);
+```
+Where:<br/>
+array of parameters (in second case group and parameter)
+
 ### IndependentParameterGroup
 In this group every counter is incremented until use all values. When all values are used, it appears reset and it starts use values from begining. It iterate until all values from longer set of values of parameter are not used.
+
+**Example:**
+```
+var indenpandentGroup1 = new IndependentParameterGroup(primeNumbers, temperatureRange);
+var indenpandentGroup2 = new IndependentParameterGroup(indenpandentGroup1, cartesianGroup2);
+```
+Where:<br/>
+array of parameters (in second case groups)
 
 ## Output
 Creating output has two options.
