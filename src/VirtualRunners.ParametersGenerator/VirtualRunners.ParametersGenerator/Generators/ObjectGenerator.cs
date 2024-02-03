@@ -5,7 +5,7 @@ using VirtualRunners.ParametersGenerator.Parameters.Interfaces;
 
 namespace VirtualRunners.ParametersGenerator.Generators
 {
-    public class TestCaseDataGenerator<TObject> : GeneratorBase, IEnumerable<TObject>, IEnumerator<TObject>
+    public class ObjectGenerator<TObject> : GeneratorBase, IEnumerable<TObject>, IEnumerator<TObject>
     {
         private static readonly Type typeOfTObject = typeof(TObject);
 
@@ -13,7 +13,7 @@ namespace VirtualRunners.ParametersGenerator.Generators
 
         object IEnumerator.Current => Current!;
 
-        public TestCaseDataGenerator(IGroupParameters group)
+        public ObjectGenerator(IGroupParameters group)
             : base(group)
         {
             if (_group.Parameters.GroupBy(g => g.Name).Any(a => a.Count() > 1))
