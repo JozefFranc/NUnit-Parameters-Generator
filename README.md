@@ -91,7 +91,42 @@ array of parameters (in second case groups)
 Creating output has two options.
 
 ### ArgumentGenerator
-This generate TasetCaseData object with anonymous parameters as is described in NUnit documentation.
+This generate TestCaseData object with anonymous parameters as is described in NUnit documentation.
+
+**Example:**
+```
+var generator = new ArgumentGenerator(indenpandentGroup2);
+foreach (TestCaseData parameter in generator)
+{
+    Console.WriteLine(parameter.Arguments[0].ToString());
+}
+```
+Where:<br/>
+indenpandentGroup2 - top level group for iterations
 
 ### ObjectGenerator
 It generates predefined objects
+
+**Example:**
+```
+class ScaleTestData
+{
+    public decimal Weight { get; set; }
+}
+
+static void Example()
+{
+    var weightRange = new RangeParameter<decimal>("Weight", 10.0m, 20.0m, 0.01m);
+
+    var indenpandentGroup1 = new IndependentParameterGroup(weightRange);
+
+    var generator = new ObjectGenerator<ScaleTestData>(indenpandentGroup1);
+    foreach (ScaleTestData parameter in generator)
+    {
+        Console.WriteLine(parameter.Weight.ToString());
+    }
+}
+```
+Where:<br/>
+ScaleTestData - class which will be used for output. Property name and parameter name must be the same.
+indenpandentGroup1 - top level group for iterations. Generators accepting parameter directly as well.
