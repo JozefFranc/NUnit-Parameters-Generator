@@ -24,6 +24,10 @@ It works like digit wheels. It use all predefined values when you iterate over i
 
 ### SetParamer
 It allow us genrates parameters based on predefined set.
+Example:
+```
+var primeNumbers = new SetParameter<int>("PrimeNumber", new[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 });
+```
 
 ### RangePatameter
 It generates parameters base on ranges. It is usually numeric value.
